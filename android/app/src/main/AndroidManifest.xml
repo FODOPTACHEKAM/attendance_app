@@ -1,4 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+<uses-permission android:name="android.permission.WAKE_LOCK" />
+<uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <application
         android:label="attendance_app2026"
         android:name="${applicationName}"
@@ -30,7 +39,12 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <service
+            android:name=".HotspotService"
+            android:exported="false"
+            android:foregroundServiceType="connectedDevice" />
     </application>
+    <uses-feature android:name="android.hardware.wifi" android:required="true" />
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and
          https://developer.android.com/reference/android/content/Intent#ACTION_PROCESS_TEXT.

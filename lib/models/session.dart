@@ -8,6 +8,7 @@ class AttendanceSession {
   final int gracePeriodMinutes;
   final int requiredConnectionMinutes;
   final int maxAttendanceCount;
+  final double gpsRadiusKm;
   final String? currentPin;
   final bool isActive;
   final DateTime createdAt;
@@ -22,6 +23,7 @@ class AttendanceSession {
     required this.gracePeriodMinutes,
     required this.requiredConnectionMinutes,
     required this.maxAttendanceCount,
+    required this.gpsRadiusKm,
     this.currentPin,
     required this.isActive,
     required this.createdAt,
@@ -37,6 +39,7 @@ class AttendanceSession {
         'gracePeriodMinutes': gracePeriodMinutes,
         'requiredConnectionMinutes': requiredConnectionMinutes,
         'maxAttendanceCount': maxAttendanceCount,
+        'gpsRadiusKm': gpsRadiusKm,
         'currentPin': currentPin,
         'isActive': isActive,
         'createdAt': createdAt.toIso8601String(),
@@ -55,6 +58,7 @@ class AttendanceSession {
         gracePeriodMinutes: json['gracePeriodMinutes'] as int,
         requiredConnectionMinutes: json['requiredConnectionMinutes'] as int,
         maxAttendanceCount: json['maxAttendanceCount'] as int,
+        gpsRadiusKm: (json['gpsRadiusKm'] as num?)?.toDouble() ?? 0.1,
         currentPin: json['currentPin'] as String?,
         isActive: json['isActive'] as bool,
         createdAt: DateTime.parse(json['createdAt'] as String),
@@ -70,6 +74,7 @@ class AttendanceSession {
     int? gracePeriodMinutes,
     int? requiredConnectionMinutes,
     int? maxAttendanceCount,
+    double? gpsRadiusKm,
     String? currentPin,
     bool? isActive,
     DateTime? createdAt,
@@ -85,6 +90,7 @@ class AttendanceSession {
         requiredConnectionMinutes:
             requiredConnectionMinutes ?? this.requiredConnectionMinutes,
         maxAttendanceCount: maxAttendanceCount ?? this.maxAttendanceCount,
+        gpsRadiusKm: gpsRadiusKm ?? this.gpsRadiusKm,
         currentPin: currentPin ?? this.currentPin,
         isActive: isActive ?? this.isActive,
         createdAt: createdAt ?? this.createdAt,

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import '../providers/attendance_provider.dart';
+import '../models/session.dart';
+import '../models/attendance_record.dart';
 import '../theme.dart';
 
 /// Lecturer dashboard for real-time session monitoring
@@ -16,6 +19,7 @@ class LecturerDashboardPage extends StatefulWidget {
 }
 
 class _LecturerDashboardPageState extends State<LecturerDashboardPage> {
+  Timer? _refreshTimer;
   @override
   void initState() {
     super.initState();
@@ -23,10 +27,12 @@ class _LecturerDashboardPageState extends State<LecturerDashboardPage> {
   }
 
   void _startAutoRefresh() {
-    Future.delayed(const Duration(seconds: 5), () {
+    _refreshTimer?.cancel();
+    _refreshTimer = Timer.periodic(const Duration(seconds: 5), (timer) {
       if (mounted) {
         context.read<AttendanceProvider>().refreshRecords();
-        _startAutoRefresh();
+      } else {
+        timer.cancel();
       }
     });
   }
@@ -95,6 +101,12 @@ class _LecturerDashboardPageState extends State<LecturerDashboardPage> {
         );
       }
     }
+  }
+
+  @override
+  void dispose() {
+    _refreshTimer?.cancel();
+    super.dispose();
   }
 
   @override
@@ -222,7 +234,7 @@ class _LecturerDashboardPageState extends State<LecturerDashboardPage> {
 }
 
 class _SessionInfoCard extends StatelessWidget {
-  final dynamic session;
+  final AttendanceSession session;
   final VoidCallback onRegeneratePin;
 
   const _SessionInfoCard({
@@ -348,7 +360,7 @@ class _StatCard extends StatelessWidget {
 }
 
 class _AttendanceRecordTile extends StatelessWidget {
-  final dynamic record;
+  final AttendanceRecord record;
 
   const _AttendanceRecordTile({required this.record});
 

@@ -48,6 +48,7 @@ class AttendanceProvider extends ChangeNotifier {
     required int gracePeriodMinutes,
     required int requiredConnectionMinutes,
     required int maxAttendanceCount,
+    required double gpsRadiusKm,
   }) async {
     _isLoading = true;
     _error = null;
@@ -60,6 +61,7 @@ class AttendanceProvider extends ChangeNotifier {
         gracePeriodMinutes: gracePeriodMinutes,
         requiredConnectionMinutes: requiredConnectionMinutes,
         maxAttendanceCount: maxAttendanceCount,
+        gpsRadiusKm: gpsRadiusKm,
       );
       _currentRecords = [];
       _error = null;

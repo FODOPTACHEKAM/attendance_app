@@ -27,6 +27,7 @@ class SessionService {
     required int gracePeriodMinutes,
     required int requiredConnectionMinutes,
     required int maxAttendanceCount,
+    required double gpsRadiusKm,
   }) async {
     // End any existing active session
     final activeSession = await _storage.getActiveSession();
@@ -43,6 +44,7 @@ class SessionService {
       gracePeriodMinutes: gracePeriodMinutes,
       requiredConnectionMinutes: requiredConnectionMinutes,
       maxAttendanceCount: maxAttendanceCount,
+      gpsRadiusKm: gpsRadiusKm,
       currentPin: _generatePin(),
       isActive: true,
       createdAt: now,

@@ -93,10 +93,7 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
 
-                  const SizedBox(height: AppSpacing.xxl),
-
-                  // Features
-                  _FeaturesList(),
+  const SizedBox(height: AppSpacing.xxl),
                 ],
               ),
             ),
@@ -174,84 +171,4 @@ class _RoleCard extends StatelessWidget {
   }
 }
 
-class _FeaturesList extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          'Key Features',
-          style: context.textStyles.titleLarge?.semiBold,
-        ),
-        const SizedBox(height: AppSpacing.md),
-        _FeatureItem(
-          icon: Icons.fingerprint,
-          title: 'Device Fingerprinting',
-          description: 'Prevents proxy attendance with hardware-level checks',
-        ),
-        const SizedBox(height: AppSpacing.sm),
-        _FeatureItem(
-          icon: Icons.timer,
-          title: 'Connection Tracking',
-          description: 'Verifies student presence for required duration',
-        ),
-        const SizedBox(height: AppSpacing.sm),
-        _FeatureItem(
-          icon: Icons.pin,
-          title: 'Rolling PIN System',
-          description: 'Dynamic codes ensure physical presence',
-        ),
-        const SizedBox(height: AppSpacing.sm),
-        _FeatureItem(
-          icon: Icons.table_chart,
-          title: 'Excel Persistence',
-          description: 'Cumulative attendance with smart increment/freeze logic',
-        ),
-      ],
-    );
-  }
-}
 
-class _FeatureItem extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final String description;
-
-  const _FeatureItem({
-    required this.icon,
-    required this.title,
-    required this.description,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Icon(
-          icon,
-          color: Theme.of(context).colorScheme.primary,
-          size: 24,
-        ),
-        const SizedBox(width: AppSpacing.sm),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: context.textStyles.bodyMedium?.semiBold,
-              ),
-              Text(
-                description,
-                style: context.textStyles.bodySmall?.withColor(
-                  Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
